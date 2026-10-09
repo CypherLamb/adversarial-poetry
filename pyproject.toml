@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "adversarial-poetry"
+version = "1.0.0"
+description = "Writer-only adversarial-poetry generation harness: MCP server + Ollama terminal client + deterministic CLI, for local red-team artifact generation on Unix."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "adversarial-poetry contributors" }]
+keywords = ["mcp", "ollama", "red-team", "llm", "poetry", "security-research"]
+
+# Runtime dependencies are intentionally minimal.
+# - mcp: official Model Context Protocol SDK (stdio server + client session).
+# - The Ollama transport is implemented on the Python standard library
+#   (urllib) so no extra HTTP dependency, and no cloud SDKs, are pulled in.
+dependencies = [
+    "mcp>=1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+# Deterministic local CLI (does not rely on model tool calls).
+adversarial-poetry = "adversarial_poetry.cli:main"
+# MCP stdio server. Protocol on stdout, diagnostics on stderr.
+adversarial-poetry-server = "adversarial_poetry.server:main"
+# Ollama-orchestrated terminal MCP client (launches the server as a subprocess).
+adversarial-poetry-client = "adversarial_poetry.client:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/adversarial_poetry"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

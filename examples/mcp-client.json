@@ -1,0 +1,12 @@
+{
+  "_comment": "Replace /ABSOLUTE/PATH/TO (twice) with your real paths. Get the server path from `command -v adversarial-poetry-server` inside the activated venv. The server executable must be an explicit absolute path.",
+  "mcpServers": {
+    "adversarial-poetry": {
+      "command": "/ABSOLUTE/PATH/TO/adversarial-poetry/.venv/bin/adversarial-poetry-server",
+      "args": [
+        "--config",
+        "/ABSOLUTE/PATH/TO/home/.config/adversarial-poetry/config.toml"
+      ]
+    }
+  }
+}

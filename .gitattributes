@@ -1,0 +1,7 @@
+# This project targets Unix. Store and check out all text files with LF
+# endings regardless of the host OS, so Unix line endings are preserved.
+* text=auto eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
